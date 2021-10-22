@@ -19,10 +19,19 @@ nodelist.update_nodes()
 nodes = nodelist.get_steem_nodes()
 steem = Steem(node=nodes, keys=[active])
 f.close()
+
+def getTotalDelegated():
+	totalDelegated = 0.0
+	currentDelegations = account.get_vesting_delegations()
+	if currentDelegations:
+		for i in currentDelegations:
+			amount = i['vesting_shares']['amount']
+			totalDelegated += float(amount)
+		return totalDelegated / (10 ** 6)
+				
 while True:
 	account = Account(user, blockchain_instance=steem)
-	effectiveSteemPower = steem.vests_to_token_power(account.get_effective_vesting_shares() / (10 ** 6))
-	if(effectiveSteemPower  > 0.1):
+	if(steem.vests_to_token_power(account.balances['total'][2] - getTotalDelegated()) > 0.1):
 		currentDelegations = account.get_vesting_delegations()
 		otherDelegationShares = 0.0
 		if currentDelegations:
