@@ -10,6 +10,9 @@ loaded_json = json.load(f)
 user = loaded_json['user']
 tipu = 'tipu'
 active = loaded_json['active_key']
+if(user == 'INSERT_USERNAME' or active == 'INSERT_ACTIVE_KEY'):
+	print('Error : Add user and keys into keys.json')
+	quit()
 
 nodelist = NodeList()
 nodelist.update_nodes()
@@ -37,6 +40,6 @@ while True:
 		account.delegate_vesting_shares(tipu, str(amountToDelegate) + ' VESTS')
 		print(user, 'delegated', amountToDelegate, 'shares to tipu')
 	else:
-		print(user, 'didnt delegate to tipu')
+		print(user, 'Didn\'t delegate to tipu')
 	print('zzz...')
 	time.sleep(60)
