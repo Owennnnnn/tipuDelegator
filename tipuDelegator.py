@@ -51,4 +51,4 @@ while True:
 	else:
 		print(user, 'Didn\'t delegate to tipu')
 	print('zzz...')
-	time.sleep(60)
+	time.sleep(60*60)
