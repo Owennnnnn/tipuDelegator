@@ -31,7 +31,7 @@ def getTotalDelegated():
 				
 while True:
 	account = Account(user, blockchain_instance=steem)
-	if(steem.vests_to_token_power(account.balances['total'][2] - getTotalDelegated()) > 0.1):
+	if(steem.vests_to_token_power(account.balances['total'][2] - getTotalDelegated()) > 0.05):
 		currentDelegations = account.get_vesting_delegations()
 		otherDelegationShares = 0.0
 		if currentDelegations:
@@ -43,8 +43,8 @@ while True:
 			otherDelegationShares = otherDelegationShares / (10 ** 6)
 		bal = account.balances['total'][2]
 		bal = str(bal).split()
-		ballance = bal[0]
-		amountToDelegate = float(float(ballance) - float(otherDelegationShares)) - 1
+		balance = bal[0]
+		amountToDelegate = float(float(balance) - float(otherDelegationShares)) - 1
 		print(amountToDelegate)
 		account.delegate_vesting_shares(tipu, str(amountToDelegate) + ' VESTS')
 		print(user, 'delegated', amountToDelegate, 'shares to tipu')
